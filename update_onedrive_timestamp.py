@@ -47,6 +47,9 @@ address = f"A{next_row}"
 
 payload = {"values": [[timestamp]]}
 
+print("Worksheet URL:", worksheet_url)
+print("Payload:", payload)
+
 url = f"{worksheet_url}/range(address='{address}')"
 resp = session.patch(url, json=payload)
 
