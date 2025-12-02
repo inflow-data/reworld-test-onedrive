@@ -2,19 +2,17 @@ name: Update OneDrive Excel timestamp
 
 on:
   schedule:
-    # Exécution toutes les heures (à HH:00 UTC)
-    - cron: "0 * * * *"
-  workflow_dispatch: {}  # Permet de le lancer manuellement
+    - cron: "0 * * * *"   # ➜ toutes les heures pile (00:00, 01:00, 02:00…)
+  workflow_dispatch:       # ➜ pour lancer manuellement depuis GitHub Actions
 
 jobs:
   run-script:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
+      - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Setup Python
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
@@ -24,7 +22,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests
 
-      - name: Run OneDrive timestamp update
+      - name: Run update script
         env:
           TENANT_ID: ${{ secrets.TENANT_ID }}
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
